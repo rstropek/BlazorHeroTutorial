@@ -13,8 +13,6 @@ dotnet new razorclasslib -o HeroesRazorLib
 dotnet new blazorserver -o HeroesServer
 # Client side version that runs on Web Assembly (An ASP.NET Core server hosts the files):
 dotnet new blazorwasm --hosted -o HeroesWasm
-# REST API to showcase HTTP functionality:
-dotnet new webapi -o HeroesApi
 ```
 
 * Navigate to */HeroesRazorLib* and delete the following auto-generated files:
@@ -69,10 +67,19 @@ app.AddComponent<HeroesRazorLib.App>("app");
 
 ## The Hero Editor - Step 1
 
+* Insert the .Net Standard project *HeroesModel/* and add a reference for it in the HeroesRazorLib.csproj:
+
+```xml
+<ItemGroup>
+    <ProjectReference Include="..\HeroesModel\HeroesModel.csproj" />
+</ItemGroup>
+````
+
+* Also add `@using HeroesModel` to *_Imports.razor* in HeroesRazorLib's root.
+
 * Add `<Heroes />` to *RazorLib/Pages/Index.razor* file after the title
 * Copy ...
     * ... *1/RazorLib/Pages/Heroes.razor* into */Pages*
-    * ... *1/RazorLib/Model/Hero.cs* into */Model*
 
 ## Displaying a List - Step 2
 

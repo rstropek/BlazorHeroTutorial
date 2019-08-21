@@ -13,4 +13,8 @@
     <PackageReference Include="System.Text.Json" Version="4.6.0-preview8.19405.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HeroesModel\HeroesModel.csproj" />
+  </ItemGroup>
+
 </Project>

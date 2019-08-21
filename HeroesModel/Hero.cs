@@ -1,4 +1,4 @@
-namespace HeroesCore
+namespace HeroesModel
 {
     public class Hero
     {

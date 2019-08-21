@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HeroesRazorLib\HeroesRazorLib.csproj" />
+    <ProjectReference Include="..\HeroesModel\HeroesModel.csproj" />
   </ItemGroup>
 
 </Project>
