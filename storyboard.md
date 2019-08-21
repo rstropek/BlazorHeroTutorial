@@ -2,7 +2,25 @@
 
 **Theme:** Manage your Heroes
 
+## Prerequisites
+
+- Install the latest .NET Core 3.0 SDK preview (https://dotnet.microsoft.com/download/dotnet-core/3.0)
+- Install the Blazor templates:
+
+```powershell
+dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview8.19405.7
+```
+- More information can be found at https://docs.microsoft.com/en-gb/aspnet/core/blazor/get-started?view=aspnetcore-3.0&tabs=netcore-cli
+
 ## The Application Shell and setting things up - Step 0
+
+### What you will learn in this chapter:
+
+- Create a reusable Razor Class Lib for our application code
+- Create a Blazor Server Side project that takes advantage of the class lib and communicates with the browser via SignalR
+- Create a Blazor Client Side project that takes advantage of the class lib and runs using web assembly
+
+
 
 * Run the following `dotnet` commands to generate the needed `.NET Core` projects:
 
@@ -67,21 +85,37 @@ app.AddComponent<HeroesRazorLib.App>("app");
 
 ## The Hero Editor - Step 1
 
+### What you will learn in this chapter:
+
+- Import the Hero Model
+- Create a component to display our Heroes
+- Use Data binding to alter the hero's name
+
+
+
 * Insert the .Net Standard project *HeroesModel/* and add a reference for it in the HeroesRazorLib.csproj:
 
 ```xml
 <ItemGroup>
     <ProjectReference Include="..\HeroesModel\HeroesModel.csproj" />
 </ItemGroup>
-````
+```
 
-* Also add `@using HeroesModel` to *_Imports.razor* in HeroesRazorLib's root.
+- Also add `@using HeroesModel` to *_Imports.razor* in HeroesRazorLib's root.
 
-* Add `<Heroes />` to *RazorLib/Pages/Index.razor* file after the title
-* Copy ...
-    * ... *1/RazorLib/Pages/Heroes.razor* into */Pages*
+- Add `<Heroes />` to *RazorLib/Pages/Index.razor* file after the title
+- Copy ...
+    - ... *1/RazorLib/Pages/Heroes.razor* into */Pages*
 
 ## Displaying a List - Step 2
+
+### What you will learn in this chapter:
+
+- Create a `service` for our data
+- How to use a `for` loop and an `if` statement in html markup
+- How to bind to a `click` event
+
+
 
 * Copy...
   * ... Replace *2/RazorLib/Pages/Heroes.razor*
@@ -91,13 +125,26 @@ app.AddComponent<HeroesRazorLib.App>("app");
 
 ## Master Detail Components - Step 3
 
+### What you will learn in this chapter:
+
+- How to create another component for our selected hero and pass data to it
+
+
+
 * Copy...
   * ... *3/RazorLib/Pages/Heroes.razor* into */HeroesRazorLib/Pages*
   * ... *3/RazorLib/Pages/HeroDetail.razor* into */HeroesRazorLib/Pages*
 
 ## Services - Step 4
 
-* Add following code in *RazorLib/Index.razor* html:
+### What you will learn in this chapter:
+
+- Create Services for retrieving heroes and sending notifications when the former happens
+- How to inject them into components
+
+
+
+* Add the following code in *RazorLib/Index.razor* html:
 ```html
 @if (MessageService.Messages != null) 
 {
@@ -112,9 +159,21 @@ app.AddComponent<HeroesRazorLib.App>("app");
 }
 ```
 
-* Copy the content of *4/RazorLib/Data* and *4/RazorLib/wwwroot* to the according folders.
+- Copy the content of *4/RazorLib/Data* and *4/RazorLib/wwwroot* and *4/RazorLib/Pages* to the according folders.
+
+- Provide the services in the `ConfigureServices` method in both server and wasm projects in the `Startup.cs` files
+
+```cs
+services.AddSingleton<IMessageService, MessageService>();
+services.AddSingleton<IHeroService, HeroService>();
+```
 
 ## Routing - Step 5
+
+### What you will learn in this chapter:
+
+- How to use the `@layout` concept
+- How to use routing
 
 * Copy the contents of the following folders to the according places:
     * *5/RazorLib/Pages*
@@ -133,6 +192,10 @@ app.AddComponent<HeroesRazorLib.App>("app");
 ````
 
 ## HTTP - Step 6
+
+### What you will learn in this chapter:
+- How to use the http client to make REST request to our ASP.Net Core Web API
+- Add functionality for adding as well as deleting heroes.
 
 * Add
 ```xml
@@ -153,13 +216,16 @@ Add
 
 ```cs
 services.AddSingleton((_) => new HttpClient() { BaseAddress = new Uri("http://localhost:61412/", UriKind.Absolute) });
-````
+```
 
 to the ConfigureServices method in *HeroesServer/Startup.cs*
 
-* In *HeroesRazorLib/*
+- In *HeroesRazorLib/*
 
-    * Replace the *Data/* and *Pages/* folders as well as *wwwroot/* with the matching folders in *6/RazorLib*
+    - Replace the *Data/* and *Pages/* folders as well as *wwwroot/* with the matching folders in *6/RazorLib*
 
-    * Add `@using System.Net.Http` to *_Imports.razor*
+    - Add `@using System.Net.Http` to *_Imports.razor*
 
+That's it, you've made it!
+
+> __Tip:__ An extensive collection of blazor resources can be found in this github repo: https://github.com/AdrienTorris/awesome-blazor.

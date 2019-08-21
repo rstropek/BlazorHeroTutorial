@@ -1,0 +1,20 @@
+﻿@page "/"
+@inject IMessageService MessageService
+
+<h1>@title</h1>
+
+@if (MessageService.Messages != null) 
+{
+    <div class="messages">
+        <h2>Messages</h2>
+        <button class="clear" @onclick="MessageService.Clear">clear</button>
+        @foreach(var message in @MessageService.Messages)
+        {
+            <div>@message</div>
+        }
+    </div>
+}
+
+@code {
+    string title = "Tour of Heroes";
+}

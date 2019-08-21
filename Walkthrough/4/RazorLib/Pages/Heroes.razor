@@ -1,0 +1,42 @@
+@inject IHeroService HeroService
+<h2>My Heroes</h2>
+<ul class="heroes">
+    @if(heroes == null)
+    {
+      <h3>Loading ...</h3>
+    }
+    else
+    {
+      @foreach (var hero in heroes)
+      {
+          <li @onclick="@(() => SelectHero(hero))" class="@((hero == selectedHero ? "selected": ""))">
+            <span class="badge">@hero.Id</span> @hero.Name
+          </li>
+      }
+    }
+</ul>
+
+@if (selectedHero != null)
+{
+  <HeroDetail SelectedHero="selectedHero"/>
+}
+
+@code {
+    List<Hero> heroes;
+    Hero selectedHero;
+
+    private void GetHeroes()
+    {
+       heroes = HeroService.GetHeroes();
+    }
+
+    protected override void OnInitialized()
+    {
+      GetHeroes();
+    }
+
+    private void SelectHero(Hero hero)
+    {
+      selectedHero = hero;
+    }
+}
