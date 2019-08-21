@@ -9,21 +9,8 @@ This project aims to give some insights into how both server side (with signal r
 
 ## Run the demo
 
-- Run the following commands:
-
-```bash
-dotnet build HeroesModel
-dotnet build HeroesApi
-dotnet build HeroesRazorLib
-dotnet build HeroesServer
-dotnet build HeroesWasm
-
-dotnet run -p HeroesApi
-
-# Either one of the following two:
-dotnet run -p HeroesServer
-dotnet run -p HeroesWasm
-```
+- Open Solution file
+- Run HeroesApi plus either HeroesServer or HeroesWasm
 
 ## Replay demo
 
