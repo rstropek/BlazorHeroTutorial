@@ -26,9 +26,9 @@ dotnet new webapi -o HeroesApi
 * Create directory */Pages*
 
 * Copy ...
-    * ... *0/Index.razor* into */Pages*
-    * ... *0/site.css* into */wwwroot/css/*
-    * ... *0/App.razor* and *0/_Index.razor* into */*
+    * ... *0/RazorLib/Pages/Index.razor* into */Pages*
+    * ... *0/RazorLib/wwwroot/css/style.css* into */wwwroot/css/*
+    * ... *0/RazorLib/App.razor* and *0/RazorLib/_Imports.razor* into *RazorLib/* root
 
 * Navigate to */HeroesServer* and delete the following auto-generated directories:
     * */Pages* 
@@ -38,7 +38,7 @@ dotnet new webapi -o HeroesApi
     * *_Imports.razor* file
     * *App.razor* file
 
-* Create directory */Blazor* and copy file *_Host.cshtml* into it
+* Create directory */Blazor* and copy file *0/Server/Blazor/_Host.cshtml* into it
 
 * Replace *Startup.cs* file with */0/Server/Startup.cs*
 
@@ -69,7 +69,7 @@ app.AddComponent<HeroesRazorLib.App>("app");
 
 ## The Hero Editor - Step 1
 
-* Add `<Heroes />` to Pages/Index.razor file after the title
+* Add `<Heroes />` to *RazorLib/Pages/Index.razor* file after the title
 * Copy ...
     * ... *1/RazorLib/Pages/Heroes.razor* into */Pages*
     * ... *1/RazorLib/Model/Hero.cs* into */Model*
@@ -90,7 +90,7 @@ app.AddComponent<HeroesRazorLib.App>("app");
 
 ## Services - Step 4
 
-* Add following code in *Index.razor* html:
+* Add following code in *RazorLib/Index.razor* html:
 ```html
 @if (MessageService.Messages != null) 
 {
@@ -125,7 +125,6 @@ app.AddComponent<HeroesRazorLib.App>("app");
         }
 ````
 
-
 ## HTTP - Step 6
 
 * Add
@@ -153,7 +152,7 @@ to the ConfigureServices method in *HeroesServer/Startup.cs*
 
 * In *HeroesRazorLib/*
 
-    * Replace the *Data/* and *Pages/* folders as well as the *wwwroot/*
+    * Replace the *Data/* and *Pages/* folders as well as *wwwroot/* with the matching folders in *6/RazorLib*
 
     * Add `@using System.Net.Http` to *_Imports.razor*
 
