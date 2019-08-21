@@ -54,7 +54,7 @@ namespace HeroesCore
         {
             if (term == String.Empty)
                 return null;
-            var heroes = await _client.GetJsonAsync<List<Hero>>($"{_baseAddress}/?searchTerm={term}");
+            var heroes = await _client.GetJsonAsync<List<Hero>>($"{_baseAddress}/search?searchTerm={term}");
             _messageService.Add($"HeroService: Found Heroes matching {term}");
             return heroes;
         }
