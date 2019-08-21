@@ -1,0 +1,31 @@
+@inject IHeroService HeroService
+<div class="search-component">
+  <h4><label for="search-box">Hero Search</label></h4>
+
+  <input id="search-box" @bind="term" />
+  <button @onclick="Search">Search</button>
+
+  <ul class="search-result">
+    @if(heroes != null)
+    {
+        @foreach(var hero in heroes)
+        {
+            <li>
+                <NavLink href=@("/detail/" + @hero.Id)>
+                    @hero.Name
+                </NavLink>
+            </li>
+        }
+    }
+  </ul>
+</div>
+
+@code
+{
+    List<Hero> heroes;
+    string term = "";
+    async Task Search()
+    {
+        heroes = await HeroService.SearchHeroes(term);
+    }
+}

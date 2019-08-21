@@ -1,0 +1,14 @@
+<h2>@hero.Name.ToUpper() Details</h2>
+<div><span>id: </span>@hero.Id</div>
+<div>
+  <label>name:
+    <input @bind="@hero.Name" placeholder="name"/>
+  </label>
+</div>
+
+@code {
+    Hero hero = new Hero {
+        Name = "Windstorm",
+        Id = 1
+    };
+}

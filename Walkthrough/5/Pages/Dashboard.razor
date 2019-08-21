@@ -1,0 +1,36 @@
+@layout Shared.HeroesLayout
+@inject IHeroService HeroService
+@inject IUriHelper UriHelper
+@page "/dashboard"
+@page "/"
+
+<div class="dashboard grid grid-pad">
+    <h3>Top Heroes</h3>
+    @if(heroes == null)
+    {
+        <h2>Loading your Heroes ...</h2>
+    }
+    else
+    {
+        @foreach(var hero in @heroes)
+        {
+            <div class="module col-1-4" @onclick="@(() => NavigateToDetail(@hero.Id))">
+                <h4>@hero.Name</h4>
+            </div>
+        }
+    }
+</div>
+
+@code
+{
+    List<Hero> heroes;
+
+    protected override void OnInitialized()
+    {
+        heroes = HeroService.GetHeroes().GetRange(1,4);
+    }
+    private void NavigateToDetail(int id)
+    {
+        UriHelper.NavigateTo($"/detail/{id}");
+    }
+}

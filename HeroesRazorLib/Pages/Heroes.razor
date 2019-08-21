@@ -1,0 +1,72 @@
+@layout Shared.HeroesLayout
+@inject IHeroService HeroService
+@inject IUriHelper UriHelper
+@inject HttpClient Http
+@page "/heroes"
+
+<div class="heroes">
+  <h2>My Heroes</h2>
+    <div>
+      <label>Hero name:
+        <input @bind="newHeroName"/>
+      </label>
+      <button @onclick="Add">
+        add
+      </button>
+    </div>
+    <ul class="heroesList">
+      @if(heroes == null)
+      {
+        <h2>Loading your Heroes ...</h2>
+      }
+      else
+      {
+        @foreach (var hero in @heroes)
+        {
+            <li>
+              <div @onclick="@(() => NavigateToDetail(@hero.Id))">
+                <span class="badge">@hero.Id</span> @hero.Name
+              </div>
+              <button class="delete" title="delete hero" @onclick="@(() => Delete(@hero.Id))">x</button>
+            </li>
+        }
+      }
+    </ul>
+</div>
+
+@code {
+    List<Hero> heroes;
+    Hero selectedHero;
+    string newHeroName;
+
+    private void SelectHero(Hero hero)
+    {
+      selectedHero = hero;
+    }
+
+    private async Task GetHeroes()
+    {
+       heroes = await HeroService.GetHeroesAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+      await GetHeroes();
+    }
+
+    private void NavigateToDetail(int id)
+    {
+        UriHelper.NavigateTo($"/detail/{id}");
+    }
+    private async Task Delete(int id)
+    {
+      await HeroService.DeleteHeroAsync(id);
+      await GetHeroes();
+    }
+    private async Task Add()
+    {
+      await HeroService.AddHeroAsync(new Hero() {Name = newHeroName});
+      newHeroName = "";
+      await GetHeroes();
+    }
+}

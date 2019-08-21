@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+@inject IMessageService MessageService
+
+<div class="main">
+    <h1>@title</h1>
+
+    <NavLink href="/dashboard" class="navigation">
+    Dashboard
+    </NavLink>
+    <NavLink href="/heroes" class="navigation">
+    Heroes
+    </NavLink>
+    @Body
+    @if (MessageService.Messages != null) 
+    {
+        <div class="messages">
+            <h2>Messages</h2>
+            <button class="clear" @onclick="MessageService.Clear">clear</button>
+            @foreach(var message in @MessageService.Messages)
+            {
+                <div>@message</div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    string title = "Tour of Heroes";
+}

@@ -1,0 +1,37 @@
+  @layout Shared.HeroesLayout
+  @page "/detail/{Id}"
+  @inject IHeroService HeroService
+  @inject IUriHelper UriHelper
+  <div class="herodetail">
+    @if(SelectedHero != null)
+    {
+      <h2>@SelectedHero.Name.ToUpper() Details</h2>
+      <div><span>id: </span>@SelectedHero.Id</div>
+      <div>
+        <label>name:
+          <input @bind="@SelectedHero.Name" placeholder="name"/>
+        </label>
+      </div>
+    }
+    <button @onclick="GoBack">go back</button>
+</div>
+  @code 
+  {
+    [Parameter]
+    public Hero SelectedHero {get; set;}
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected override  void OnInitialized () =>  GetHero();
+
+    private  void GetHero()
+    {
+      SelectedHero =  HeroService.GetHero(Convert.ToInt32(Id));
+    }
+
+    private void GoBack()
+    {
+      UriHelper.NavigateTo("/");
+    }
+  }

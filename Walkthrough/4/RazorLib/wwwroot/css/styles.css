@@ -1,0 +1,202 @@
+﻿/* Global Styles */
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+h2, h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+body {
+  margin: 2em;
+}
+body, input[text], button {
+  color: #333;
+  font-family: Cambria, Georgia;
+}
+a {
+  cursor: pointer;
+  cursor: hand;
+}
+button {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+
+/* everywhere else */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Main Layout's private CSS styles */
+.main h1 {
+  font-size: 250%;
+  margin-bottom: 0;
+}
+.main h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+.main nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+.main nav a:visited, .main  a:link {
+  color: #334953;
+}
+.main nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+.main nav a.active {
+  color: #039be5;
+}
+
+/* Navigation link styles */
+.navigation {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+.navigation:visited, .navigation:link {
+  color: #607D8B;
+}
+.navigation:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+.navigation .active {
+  color: #039be5;
+}
+
+  /* Heroes' css */
+.heroes .heroesList {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+  }
+.heroes .heroesList li {
+    position: relative;
+    cursor: pointer;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 1.6em;
+    border-radius: 4px;
+  }
+  
+.heroes .heroesList li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+  }
+  
+.heroes .heroesList a {
+    color: #333;
+    text-decoration: none;
+    position: relative;
+    display: block;
+    width: 250px;
+  }
+  
+.heroes .heroesList a:hover {
+    color:#607D8B;
+  }
+  
+.heroes .heroesList .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color:#405061;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    min-width: 16px;
+    text-align: right;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+  }
+  
+.heroes button {
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+    font-family: Arial;
+  }
+  
+.heroes button:hover {
+    background-color: #cfd8dc;
+  }
+  
+.heroes button.delete {
+    position: relative;
+    left: 194px;
+    top: -32px;
+    background-color: gray !important;
+    color: white;
+  }
+/* MessagesComponent's private CSS styles */
+.messages h2 {
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+.messages body {
+  margin: 2em;
+}
+.messages body, .messages input[text], .messages button {
+  color: crimson;
+  font-family: Cambria, Georgia;
+}
+
+.messages button.clear {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+.messages button:hover {
+  background-color: #cfd8dc;
+}
+.messages button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+.messages button.clear {
+  color: #333;
+  margin-bottom: 12px;
+}

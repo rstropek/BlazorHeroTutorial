@@ -1,0 +1,46 @@
+@layout Shared.HeroesLayout
+@inject IHeroService HeroService
+@inject IUriHelper UriHelper
+@page "/heroes"
+
+<ul class="heroes">
+  <h2>My Heroes</h2>
+    @if(heroes == null)
+    {
+      <h3>Loading ...</h3>
+    }
+    else
+    {
+      @foreach (var hero in heroes)
+      {
+          <li @onclick="@(() => NavigateToDetail(@hero.Id))">
+            <span class="badge">@hero.Id</span> @hero.Name
+          </li>
+      }
+    }
+</ul>
+
+@code {
+    Hero selectedHero;
+    List<Hero> heroes;
+    
+    private void GetHeroes()
+    {
+       heroes = HeroService.GetHeroes();
+    }
+
+    protected override void OnInitialized()
+    {
+      GetHeroes();
+    }
+
+    private void SelectHero(Hero hero)
+    {
+      selectedHero = hero;
+    }
+
+    private void NavigateToDetail(int id)
+    {
+        UriHelper.NavigateTo($"/detail/{id}");
+    }
+}

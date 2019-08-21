@@ -1,0 +1,47 @@
+<h2>My Heroes</h2>
+<ul class="heroes">
+  @if(heroes == null)
+  {
+    <h3>Loading Heroes ...</h3>
+  }
+  else
+  {
+    @foreach (var hero in heroes)
+    {
+        <li @onclick="@(() => SelectHero(hero))" class="@((hero == selectedHero ? "selected": ""))">
+          <span class="badge">@hero.Id</span> @hero.Name
+        </li>
+    }
+  }
+</ul>
+
+@if (selectedHero != null)
+{
+  <h2>@selectedHero.Name.ToUpper() Details</h2>
+  <div><span>id: </span>@selectedHero.Id</div>
+  <div>
+    <label>name:
+      <input @bind="@selectedHero.Name" placeholder="name"/>
+    </label>
+  </div>
+}
+
+@code {
+    List<Hero> heroes;
+    Hero selectedHero;
+
+    private void GetHeroes()
+    {
+       heroes = MockHeroes.Heroes;
+    }
+
+    protected override void OnInitialized()
+    {
+      GetHeroes();
+    }
+
+    private void SelectHero(Hero hero)
+    {
+      selectedHero = hero;
+    }
+}
