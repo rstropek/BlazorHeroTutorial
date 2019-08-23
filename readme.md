@@ -16,6 +16,17 @@ This project aims to give some insights into how both server side (with signal r
 
 - Follow the instructions in storyboard.md
 
+## Docker
+
+- You can also deploy the application to Docker using the following commands:
+
+```bash
+docker-compose build
+docker-compose up --remove-orphans
+```
+
+## Licence
+
 This project is based on the Angular "Tour of Heroes" tutorial (https://angular.io/tutorial). 
 
 The code and its licence can be found at: https://github.com/angular/angular/blob/master/aio/content/license.md
