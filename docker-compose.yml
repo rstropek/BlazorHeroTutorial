@@ -12,9 +12,13 @@ services:
         dockerfile: server.Dockerfile
       ports:
         - "5000:80"
+      depends_on:
+        - webapi
     blazorwasm:
       build:
         context: .
         dockerfile: wasm.Dockerfile
       ports:
         - "4000:80"
+      depends_on:
+        - webapi

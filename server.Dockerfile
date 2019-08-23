@@ -1,7 +1,9 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build-env
 WORKDIR /app
 
-COPY . ./
+COPY ./HeroesModel ./HeroesModel
+COPY ./HeroesRazorLib ./HeroesRazorLib
+COPY ./HeroesServer ./HeroesServer
 
 RUN dotnet build HeroesServer/*.csproj -p:DefineConstants=DOCKER
 RUN dotnet publish HeroesServer/*.csproj -o out
