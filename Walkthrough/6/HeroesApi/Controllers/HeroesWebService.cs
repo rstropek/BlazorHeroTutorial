@@ -11,7 +11,13 @@ namespace HeroesApi
     public class HeroesController : Controller
     {
         [HttpGet]
-        public IEnumerable<Hero> Heroes([FromQuery] string searchTerm)
+        public IEnumerable<Hero> Heroes()
+        {
+            return SampleData.Heroes;
+        }
+        [HttpGet]
+        [Route("search")]
+        public IEnumerable<Hero> SearchHeroes([FromQuery] string searchTerm = "")
         {
             if (searchTerm == null || searchTerm == String.Empty)
                 return SampleData.Heroes;

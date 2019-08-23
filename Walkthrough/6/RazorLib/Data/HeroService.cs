@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using HeroesModel;
 
 namespace HeroesCore
 {
@@ -53,7 +54,7 @@ namespace HeroesCore
         public async Task<List<Hero>> SearchHeroes(string term)
         {
             if (term == String.Empty)
-                return null;
+                return new List<Hero>();
             var heroes = await _client.GetJsonAsync<List<Hero>>($"{_baseAddress}/search?searchTerm={term}");
             _messageService.Add($"HeroService: Found Heroes matching {term}");
             return heroes;

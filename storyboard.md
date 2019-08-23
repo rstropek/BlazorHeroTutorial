@@ -30,7 +30,7 @@ dotnet new razorclasslib -o HeroesRazorLib
 # Server side version that communicates via SignalR:
 dotnet new blazorserver -o HeroesServer
 # Client side version that runs on Web Assembly (An ASP.NET Core server hosts the files):
-dotnet new blazorwasm --hosted -o HeroesWasm
+dotnet new blazorwasm -o HeroesWasm
 ```
 
 * Navigate to */HeroesRazorLib* and delete the following auto-generated files:
@@ -40,6 +40,7 @@ dotnet new blazorwasm --hosted -o HeroesWasm
     * */wwwroot/exampleJsInterop.js*
 
 * Create directory */Pages*
+* Inside */wwwroot* delete the .css-file and create a folder */css*
 
 * Copy ...
     * ... *0/RazorLib/Pages/Index.razor* into */Pages*
@@ -66,21 +67,46 @@ dotnet new blazorwasm --hosted -o HeroesWasm
 </ItemGroup>
 ```
 
-* Navigate to *HeroesWasm/* and delete the following:
-    * *HeroesWasm.sln*
+- We are taking advantage of the C# 8.0 preview. The biggest change is support for nullable reference types. Add the following to the `<Property Group />`:
+
+```xml
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+```
+
+- Navigate to *HeroesWasm/* and delete the following:
+    * */Pages*
     * */Shared*
-    * */Server*
-    * */Client/Pages*
-    * */Client/Shared*
-    * */Client/wwwroot/css*
+    * */wwwroot/css*
+    * */wwwroot/sample-data*
     * *_Imports.razor*
     * *App.razor*
 
-* Copy *0/Wasm/wwwroot/index.html* into according directory
+- Copy *0/Wasm/wwwroot/index.html* into according directory
 
-* Replace the Configure Method's content in *Startup.cs* with this line:
+- Replace the Configure Method's content in *Startup.cs* with this line:
+
 ```cs
 app.AddComponent<HeroesRazorLib.App>("app");
+```
+
+- Include HeroesRazorLib reference, etc. in the client's `.csproj` file, too.
+
+```xml
+<PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+</PropertyGroup>
+<ItemGroup>
+    <ProjectReference Include="..\HeroesRazorLib\HeroesRazorLib.csproj" />
+</ItemGroup>
 ```
 
 ## The Hero Editor - Step 1
@@ -93,7 +119,7 @@ app.AddComponent<HeroesRazorLib.App>("app");
 
 
 
-* Insert the .Net Standard project *HeroesModel/* and add a reference for it in the HeroesRazorLib.csproj:
+* Insert the .Net Standard project *HeroesModel/* and add a reference for it in HeroesRazorLib.csproj:
 
 ```xml
 <ItemGroup>
@@ -115,11 +141,8 @@ app.AddComponent<HeroesRazorLib.App>("app");
 - How to use a `for` loop and an `if` statement in html markup
 - How to bind to a `click` event
 
-
-
-* Copy...
-  * ... Replace *2/RazorLib/Pages/Heroes.razor*
-  * ... Copy *2/RazorLib/Data/MockHeroes.cs* into RazorLib root
+- Replace *2/RazorLib/Pages/Heroes.razor*
+- Copy *2/RazorLib/Data/MockHeroes.cs* into RazorLib root
 
 * Add `@using HeroesCore` to *HeroesRazorLib/_Imports.razor*
 
@@ -144,7 +167,7 @@ app.AddComponent<HeroesRazorLib.App>("app");
 
 
 
-* Add the following code in *RazorLib/Index.razor* html:
+* Add the following code in *RazorLib/Index.razor* html under the Heroes tag:
 ```html
 @if (MessageService.Messages != null) 
 {
@@ -175,12 +198,16 @@ services.AddSingleton<IHeroService, HeroService>();
 - How to use the `@layout` concept
 - How to use routing
 
+- Create a folder named *Shared/* in *HeroesRazorLib/*
+
+- Delete *Index.razor* in *Pages/*. We don't need an Index component as we use a blazor layout.
+
 * Copy the contents of the following folders to the according places:
     * *5/RazorLib/Pages*
     * *5/RazorLib/Shared*
     * *5/RazorLib/wwwroot*
 
-* In *HeroService.sc* and *IHeroService.cs* add the method:
+* In *HeroService.cs* and *IHeroService.cs* add the method:
 
 ```cs
         public Hero GetHero(int id)
@@ -229,3 +256,23 @@ to the ConfigureServices method in *HeroesServer/Startup.cs*
 That's it, you've made it!
 
 > __Tip:__ An extensive collection of blazor resources can be found in this github repo: https://github.com/AdrienTorris/awesome-blazor.
+
+## Appendix - Deploy to Docker
+
+Replace the _baseAddress assignment in the HeroService constructor in HeroesRazorLib with the following code:
+
+```cs
+// Sets api address based on execution environment
+#if DOCKER
+_baseAddress = "http://webapi/api/Heroes";
+#else
+_baseAddress = "http://localhost:8000/api/Heroes";
+#endif
+``` 
+
+Run the following commands in project root:
+
+```bash
+docker-compose build
+docker-compose up --remove-orphans
+```

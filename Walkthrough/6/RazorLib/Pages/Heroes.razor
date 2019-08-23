@@ -35,9 +35,9 @@
 </div>
 
 @code {
-    List<Hero> heroes;
-    Hero selectedHero;
-    string newHeroName;
+    List<Hero> heroes = new List<Hero>();
+    Hero selectedHero = new Hero();
+    string newHeroName = "";
 
     private void SelectHero(Hero hero)
     {

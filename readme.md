@@ -25,6 +25,8 @@ docker-compose build
 docker-compose up --remove-orphans
 ```
 
+- For some details about Docker usage have a look at the appendix in storyboard.md
+
 ## Licence
 
 This project is based on the Angular "Tour of Heroes" tutorial (https://angular.io/tutorial). 

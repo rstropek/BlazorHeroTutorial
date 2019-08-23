@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using HeroesCore;
+using HeroesModel;
 
 namespace HeroesCore 
 {
