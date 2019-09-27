@@ -1,7 +1,7 @@
   @layout Shared.HeroesLayout
   @page "/detail/{Id}"
   @inject IHeroService HeroService
-  @inject IUriHelper UriHelper
+  @inject NavigationManager Navigator
   <div class="herodetail">
     @if(SelectedHero != null)
     {
@@ -34,12 +34,12 @@
 
     private void GoBack()
     {
-      UriHelper.NavigateTo("/");
+      Navigator.NavigateTo("/");
     }
 
     private async void Save()
     {
       await HeroService.UpdateHeroAsync(SelectedHero);
-      UriHelper.NavigateTo("/");
+      Navigator.NavigateTo("/");
     }
   }

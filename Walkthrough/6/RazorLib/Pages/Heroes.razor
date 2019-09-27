@@ -1,6 +1,6 @@
 @layout Shared.HeroesLayout
 @inject IHeroService HeroService
-@inject IUriHelper UriHelper
+@inject NavigationManager Navigator
 @inject HttpClient Http
 @page "/heroes"
 
@@ -17,7 +17,7 @@
     <ul class="heroesList">
       @if(heroes == null)
       {
-        <h2>Loading your Heroes ...</h2>
+        <li>Loading your Heroes ...</li>
       }
       else
       {
@@ -56,7 +56,7 @@
 
     private void NavigateToDetail(int id)
     {
-        UriHelper.NavigateTo($"/detail/{id}");
+        Navigator.NavigateTo($"/detail/{id}");
     }
     private async Task Delete(int id)
     {

@@ -4,3 +4,4 @@
 **/.vscode
 **/.vs
 **/.DS_Store
+*.csproj.user

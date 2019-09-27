@@ -32,7 +32,7 @@ namespace HeroesServer
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddMvc().AddRazorPagesOptions(options => { options.RootDirectory = "/Blazor"; });
-            services.AddSingleton((_) => new HttpClient() { BaseAddress = new Uri("http://localhost:61412/", UriKind.Absolute) });
+            services.AddSingleton((_) => new HttpClient() { BaseAddress = new Uri("https://localhost:5001/", UriKind.Absolute) });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +55,7 @@ namespace HeroesServer
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapBlazorHub<HeroesRazorLib.App>(selector: "app");
+                endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

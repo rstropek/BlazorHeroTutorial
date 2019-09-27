@@ -1,6 +1,6 @@
 @layout Shared.HeroesLayout
 @inject IHeroService HeroService
-@inject IUriHelper UriHelper
+@inject NavigationManager Navigator
 @page "/dashboard"
 @page "/"
 
@@ -8,7 +8,7 @@
     <h3>Top Heroes</h3>
     @if(heroes == null)
     {
-        <h2>Loading your Heroes ...</h2>
+        <h4>Loading your Heroes ...</h4>
     }
     else
     {
@@ -33,6 +33,6 @@
     }
     private void NavigateToDetail(int id)
     {
-        UriHelper.NavigateTo($"/detail/{id}");
+        Navigator.NavigateTo($"/detail/{id}");
     }
 }
