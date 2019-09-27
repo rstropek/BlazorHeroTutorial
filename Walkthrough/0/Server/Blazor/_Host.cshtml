@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using HeroesRazorLib
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 </head>
 <body>
     <app>
-        <div>Loading ...</div>
+        @(await Html.RenderComponentAsync<App>(RenderMode.Server))
     </app>
 
     <script src="_framework/blazor.server.js"></script>

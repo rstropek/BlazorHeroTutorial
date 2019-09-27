@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+
+<div class="main">
+    <h1>@title</h1>
+
+    <NavLink href="/dashboard" class="navigation">
+    Dashboard
+    </NavLink>
+    <NavLink href="/heroes" class="navigation">
+    Heroes
+    </NavLink>
+    @Body
+</div>
+
+@code {
+    string title = "Tour of Heroes";
+}

@@ -1,5 +1,10 @@
-<Router AppAssembly="typeof(App).Assembly">
-    <NotFoundContent>
-        <p>Sorry, there's nothing at this address.</p>
-    </NotFoundContent>
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(HeroesLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(HeroesLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
 </Router>

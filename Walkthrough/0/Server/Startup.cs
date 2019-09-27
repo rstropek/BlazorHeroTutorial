@@ -51,7 +51,7 @@ namespace HeroesServer
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapBlazorHub<HeroesRazorLib.App>(selector: "app");
+                endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
