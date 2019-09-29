@@ -237,7 +237,7 @@ services.AddSingleton<IHeroService, HeroService>();
 
 * Delete *Index.razor* in *Pages/*. We don't need an Index component as we now use a [Blazor layout](https://docs.microsoft.com/en-us/aspnet/core/blazor/layouts).
 
-* Copy the contents of the following folders to the according places:
+* Copy the contents of the following folders to the corresponding places:
     * *5/RazorLib/Pages*
     * *5/RazorLib/Shared*
     * *5/RazorLib/wwwroot*
@@ -261,46 +261,45 @@ public Hero GetHero(int id)
 
 ## HTTP - Step 6
 
-### What you will learn in this chapter:
-- How to use the http client to make REST request to our ASP.Net Core Web API
-- Add functionality for adding as well as deleting heroes.
+### What you will learn in this chapter
 
-* Add
-```xml
-    <PackageReference Include="System.Text.Json" Version="4.6.0-preview8.19405.3" />
-````
-to HeroesWasm.proj and
+* How to use the HTTP client to make REST request to our ASP.Net Core Web API
 
-```xml
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview8.19405.7" />
-    <PackageReference Include="System.Text.Json" Version="4.6.0-preview8.19405.3" />
-```
+* Add functionality for adding and deleting heroes
 
-to HeroesRazorLib.proj.
+### Web API
 
-* Insert the .Net Core project *HeroesApi/* . That's the REST client for our http requests.
+* Copy [*HeroesApi*](https://github.com/rstropek/BlazorHeroTutorial/tree/master/HeroesApi) into your project
 
-Add
+* Add *HeroesApi* project to your solution
 
-```cs
-services.AddSingleton((_) => new HttpClient() { BaseAddress = new Uri("http://localhost:61412/", UriKind.Absolute) });
-```
+* Make yourself familiar with the code of the web API
 
-to the ConfigureServices method in *HeroesServer/Startup.cs*
+* Start the web API
 
-- In *HeroesRazorLib/*
+### HTTP Client
 
-    - Replace the *Data/* and *Pages/* folders as well as *wwwroot/* with the matching folders in *6/RazorLib*
+* Remove *HeroesRazorLib/Data/HeroService.cs*. This is necessary because the logic for the hero service will differ between client- and server-side Blazor.
 
-    - Add `@using System.Net.Http` to *_Imports.razor*
+* Copy the contents of the following folders to the corresponding places:
+    * *6/HeroesServer/Data*
+    * *6/HeroesWasm/Data*
+
+* Make yourself familiar with the content of the file you copied. Note especially:
+  * Use of new [JSON Serializer/Deserializer](https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-core-3-0#fast-built-in-json-support) built into .NET Core 3 on the *server*
+  * Use of [`IHttpClientFactory`](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests) on the *server*
+  * Use of [pre-configured `HttpClient`](https://docs.microsoft.com/en-us/aspnet/core/blazor/call-web-api#httpclient-and-json-helpers) on the *client*
+
+* In *HeroesRazorLib/* replace the *Data/* and *Pages/* folders as well as *wwwroot/* with the matching folders in *6/RazorLib*
+
+* Make yourself familiar with the content of the file you copied. Note especially:
+  * Async programming model on client and server
 
 That's it, you've made it!
 
-> __Tip:__ An extensive collection of blazor resources can be found in this github repo: https://github.com/AdrienTorris/awesome-blazor.
-
 ## Appendix - Deploy to Docker
 
-Replace the _baseAddress assignment in the HeroService constructor in HeroesRazorLib with the following code:
+Replace the `_baseAddress` assignment in the HeroService constructor in HeroesRazorLib with the following code:
 
 ```cs
 // Sets api address based on execution environment

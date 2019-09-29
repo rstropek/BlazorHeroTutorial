@@ -1,7 +1,6 @@
 @layout Shared.HeroesLayout
 @inject IHeroService HeroService
 @inject NavigationManager Navigator
-@inject HttpClient Http
 @page "/heroes"
 
 <div class="heroes">
@@ -27,9 +26,7 @@
               <div @onclick="@(() => NavigateToDetail(@hero.Id))">
                 <span class="badge">@hero.Id</span> @hero.Name
               </div>
-              <button class="delete" title="delete hero" @onclick="@(() => Delete(@hero.Id))">
-                x
-              </button>
+              <button class="delete" title="delete hero" @onclick="@(() => Delete(@hero.Id))">x</button>
             </li>
         }
       }

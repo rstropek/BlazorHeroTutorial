@@ -16,12 +16,7 @@ namespace HeroesCore
         {
             _messageService = messageService;
             _client = client;
-            // Sets api address based on execution environment
-            #if DOCKER
-            _baseAddress = "http://webapi/api/Heroes";
-            #else
-            _baseAddress = "https://localhost:8001/api/Heroes";
-            #endif
+            _baseAddress = "http://localhost:8000/api/Heroes";
         }
 
         public async Task<List<Hero>> GetHeroesAsync()

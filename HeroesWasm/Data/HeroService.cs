@@ -9,9 +9,9 @@ namespace HeroesCore
 {
     public class HeroService : IHeroService
     {
-        IMessageService _messageService;
-        HttpClient _client;
-        string _baseAddress;
+        readonly IMessageService _messageService;
+        readonly HttpClient _client;
+        readonly string _baseAddress;
         public HeroService(IMessageService messageService, HttpClient client)
         {
             _messageService = messageService;
