@@ -119,11 +119,13 @@ Try to compile your solution. You should be able to compile it without any error
 
 ## The Hero Editor - Step 1
 
-### What you will learn in this chapter:
+### What you will learn in this chapter
 
-- Import the Hero Model
-- Create a component to display our Heroes
-- Use Data binding to alter the hero's name
+* Import the Hero Model
+
+* Create a component to display our Heroes
+
+* Use Data binding to alter the hero's name
 
 ### Adding the Model Project
 
@@ -135,68 +137,86 @@ Try to compile your solution. You should be able to compile it without any error
 </ItemGroup>
 ```
 
+### Adding the First Razor File
+
 * Add `@using HeroesModel` to *_Imports.razor* in HeroesRazorLib's root.
 
 * Copy ...
   * ... *1/RazorLib/Pages/Heroes.razor* into */Pages*
 
 * Make yourself familiar with the content of the file you copied. Note especially:
+  * Syntax for [Code Rendering](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor#razor-syntax) with Razor
   * [Data Binding](https://docs.microsoft.com/en-us/aspnet/core/blazor/components#data-binding) with `@bind`
 
-* Add new component using [HTML element syntax](https://docs.microsoft.com/en-us/aspnet/core/blazor/components#use-components) `<Heroes />` to *RazorLib/Pages/Index.razor* file after the title
+* Add new component using [HTML element syntax](https://docs.microsoft.com/en-us/aspnet/core/blazor/components#use-components) `<Heroes />` to *RazorLib/Pages/Index.razor* instead of the title.
+
+```html
+@page "/"
+
+<Heroes />
+
+@code {
+}
+```
 
 ## Displaying a List - Step 2
 
 ### What you will learn in this chapter:
 
-- Create a `service` for our data
-- How to use a `for` loop and an `if` statement in html markup
-- How to bind to a `click` event
+* Create a *service* for our data
 
-- Replace *2/RazorLib/Pages/Heroes.razor*
-- Copy *2/RazorLib/Data/MockHeroes.cs* into RazorLib root
+* How to use a `for` loop and an `if` statement in Razor syntax
+
+* How to bind to a `click` event
+
+### Add Heroes List
+
+* Replace *2/RazorLib/Pages/Heroes.razor*
+
+* Copy *2/RazorLib/Data/MockHeroes.cs* into RazorLib root
 
 * Add `@using HeroesCore` to *HeroesRazorLib/_Imports.razor*
 
+* Make yourself familiar with the content of the file you copied. Note especially:
+  * Syntax for [Explicit Razor Expressions](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor#explicit-razor-expressions)
+  * Razor [Control Structures](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor#explicit-razor-expressions)
+  * Blazor [Event Handling](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor#explicit-razor-expressions)
+  * [Lifecycle Method](https://docs.microsoft.com/en-us/aspnet/core/blazor/components#lifecycle-methods) `OnInitialized`
+
 ## Master Detail Components - Step 3
 
-### What you will learn in this chapter:
+### What you will learn in this chapter
 
-- How to create another component for our selected hero and pass data to it
+* How to create another component for our selected hero and pass data to it
 
-
+### Add Details Page
 
 * Copy...
   * ... *3/RazorLib/Pages/Heroes.razor* into */HeroesRazorLib/Pages*
   * ... *3/RazorLib/Pages/HeroDetail.razor* into */HeroesRazorLib/Pages*
 
+* Make yourself familiar with the content of the file you copied. Note especially:
+  * [Component Parameters](https://docs.microsoft.com/en-us/aspnet/core/blazor/components#component-parameters)
+
 ## Services - Step 4
 
-### What you will learn in this chapter:
+### What you will learn in this chapter
 
-- Create Services for retrieving heroes and sending notifications when the former happens
-- How to inject them into components
+* Create Services for retrieving heroes and sending notifications when the former happens
 
+* How to inject services into components
 
+### Add Messages to Index
 
-* Add the following code in *RazorLib/Index.razor* html under the Heroes tag:
-```html
-@if (MessageService.Messages != null) 
-{
-    <div class="messages">
-        <h2>Messages</h2>
-        <button class="clear" @onclick="MessageService.Clear">clear</button>
-        @foreach(var message in @MessageService.Messages)
-        {
-            <div>@message</div>
-        }
-    </div>
-}
-```
+* Copy the content of *4/RazorLib/Data* and *4/RazorLib/wwwroot* and *4/RazorLib/Pages* to the according folders.
 
-- Copy the content of *4/RazorLib/Data* and *4/RazorLib/wwwroot* and *4/RazorLib/Pages* to the according folders.
+* Make yourself familiar with the content of the file you copied. Note especially:
+  * Implementation of `INotifyPropertyChanged` in `IMessageService`
+  * Use of `InvokeAsync` and `StateHasChanged` to [manually update UI](https://docs.microsoft.com/en-us/aspnet/core/blazor/components#invoke-component-methods-externally-to-update-state) in *Index.razor*
+  * [Implementation of `IDisposable`](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.0#component-disposal-with-idisposable) in *Index.razor*
+  * [Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/blazor/dependency-injection?view=aspnetcore-3.0) in e.g. *Heroes.razor*
 
-- Provide the services in the `ConfigureServices` method in both server and wasm projects in the `Startup.cs` files
+* Provide the services in the `ConfigureServices` method in both server and WASM projects in the *Startup.cs* files:
 
 ```cs
 services.AddSingleton<IMessageService, MessageService>();
@@ -205,14 +225,17 @@ services.AddSingleton<IHeroService, HeroService>();
 
 ## Routing - Step 5
 
-### What you will learn in this chapter:
+### What you will learn in this chapter
 
-- How to use the `@layout` concept
-- How to use routing
+* How to use the `@layout` concept
 
-- Create a folder named *Shared/* in *HeroesRazorLib/*
+* How to use routing
 
-- Delete *Index.razor* in *Pages/*. We don't need an Index component as we use a blazor layout.
+### Add Routing and Layout
+
+* Create a folder named *Shared/* in *HeroesRazorLib/* if it doesn't exist already
+
+* Delete *Index.razor* in *Pages/*. We don't need an Index component as we now use a [Blazor layout](https://docs.microsoft.com/en-us/aspnet/core/blazor/layouts).
 
 * Copy the contents of the following folders to the according places:
     * *5/RazorLib/Pages*
@@ -222,13 +245,19 @@ services.AddSingleton<IHeroService, HeroService>();
 * In *HeroService.cs* and *IHeroService.cs* add the method:
 
 ```cs
-        public Hero GetHero(int id)
-        {
-            var hero = MockHeroes.Heroes.Find(h => h.Id == id);
-            _messageService.Add($"HeroService: fetched hero #{hero.Id}");
-            return hero;
-        }
-````
+public Hero GetHero(int id)
+{
+    var hero = MockHeroes.Heroes.Find(h => h.Id == id);
+    _messageService.Add($"HeroService: fetched hero #{hero.Id}");
+    return hero;
+}
+```
+
+* Make yourself familiar with the content of the file you copied. Note especially:
+  * Use of `@page` statement for [Routing](https://docs.microsoft.com/en-us/aspnet/core/blazor/routing#route-templates)
+  * Use of [`NavigationManager`](https://docs.microsoft.com/en-us/aspnet/core/blazor/routing#uri-and-navigation-state-helpers) to trigger navigation in code
+  * Consuming [Route Parameters](https://docs.microsoft.com/en-us/aspnet/core/blazor/routing#uri-and-navigation-state-helpers)
+  * Use of [Layouts](https://docs.microsoft.com/en-us/aspnet/core/blazor/layouts)
 
 ## HTTP - Step 6
 

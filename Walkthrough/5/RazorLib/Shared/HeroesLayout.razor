@@ -1,22 +1,27 @@
 ﻿@inherits LayoutComponentBase
 @inject IMessageService MessageService
+@using System.ComponentModel
 
 <div class="main">
     <h1>@title</h1>
 
-    <NavLink href="/dashboard" class="navigation">
-    Dashboard
-    </NavLink>
-    <NavLink href="/heroes" class="navigation">
-    Heroes
-    </NavLink>
+    <nav>
+        <a href="/dashboard" class="navigation">
+            Dashboard
+        </a>
+        <a href="/heroes" class="navigation">
+            Heroes
+        </a>
+    </nav>
+
     @Body
-    @if (MessageService.Messages != null) 
+
+    @if (MessageService.Messages != null)
     {
         <div class="messages">
             <h2>Messages</h2>
             <button class="clear" @onclick="MessageService.Clear">clear</button>
-            @foreach(var message in @MessageService.Messages)
+            @foreach (var message in @MessageService.Messages)
             {
                 <div>@message</div>
             }
@@ -26,4 +31,19 @@
 
 @code {
     string title = "Tour of Heroes";
+
+    protected override void OnInitialized()
+    {
+        MessageService.PropertyChanged += OnMessageServiceChanged;
+    }
+
+    void OnMessageServiceChanged(object sender, PropertyChangedEventArgs ea)
+    {
+        InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        MessageService.PropertyChanged -= OnMessageServiceChanged;
+    }
 }

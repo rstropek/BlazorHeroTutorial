@@ -2,6 +2,7 @@
   @page "/detail/{Id}"
   @inject IHeroService HeroService
   @inject NavigationManager Navigator
+
   <div class="herodetail">
     @if(SelectedHero != null)
     {
@@ -18,10 +19,10 @@
   @code 
   {
     [Parameter]
-    public Hero SelectedHero {get; set;}
+    public Hero? SelectedHero {get; set;}
 
     [Parameter]
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     protected override  void OnInitialized () =>  GetHero();
 

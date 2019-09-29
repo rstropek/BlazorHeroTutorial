@@ -3,11 +3,11 @@
 @inject NavigationManager Navigator
 @page "/heroes"
 
+<h2>My Heroes</h2>
 <ul class="heroes">
-  <h2>My Heroes</h2>
     @if(heroes == null)
     {
-      <h3>Loading ...</h3>
+      <li>Loading ...</li>
     }
     else
     {
@@ -21,8 +21,8 @@
 </ul>
 
 @code {
-    Hero selectedHero;
-    List<Hero> heroes;
+    Hero? selectedHero;
+    List<Hero>? heroes;
     
     private void GetHeroes()
     {

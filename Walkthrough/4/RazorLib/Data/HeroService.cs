@@ -9,7 +9,7 @@ namespace HeroesCore
 {
     public class HeroService : IHeroService
     {
-        IMessageService _messageService;
+        readonly IMessageService _messageService;
 
         public HeroService(IMessageService messageService)
         {

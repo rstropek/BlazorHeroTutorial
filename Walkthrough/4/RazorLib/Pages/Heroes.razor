@@ -3,7 +3,7 @@
 <ul class="heroes">
     @if(heroes == null)
     {
-      <h3>Loading ...</h3>
+      <li>Loading ...</li>
     }
     else
     {
@@ -22,8 +22,8 @@
 }
 
 @code {
-    List<Hero> heroes = new List<Hero>();
-    Hero selectedHero = new Hero();
+    List<Hero>? heroes;
+    Hero? selectedHero;
 
     private void GetHeroes()
     {
