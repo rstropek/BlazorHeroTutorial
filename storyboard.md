@@ -183,6 +183,10 @@ Try to compile your solution. You should be able to compile it without any error
   * Blazor [Event Handling](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor#explicit-razor-expressions)
   * [Lifecycle Method](https://docs.microsoft.com/en-us/aspnet/core/blazor/components#lifecycle-methods) `OnInitialized`
 
+## Hands-on Lab
+
+At this point in the tutorial, you can try to solve the [MathTrainer Lab](https://github.com/rstropek/BlazorHeroTutorial/tree/master/Lab/MathTrainer) yourself. Don't look at the sample solution immediately. Try to come up with your own code first.
+
 ## Master Detail Components - Step 3
 
 ### What you will learn in this chapter
