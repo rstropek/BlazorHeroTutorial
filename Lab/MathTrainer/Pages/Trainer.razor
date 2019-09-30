@@ -1,0 +1,82 @@
+﻿@page "/"
+
+<h1>Math Trainer</h1>
+
+<h2>Parameters</h2>
+
+<table>
+    <tbody>
+        <tr>
+            <td>Base:</td>
+            <td>
+                <input @bind="baseNumber" type="number" />
+            </td>
+        </tr>
+        <tr>
+            <td>Height:</td>
+            <td>
+                <input @bind="height" type="number" />
+                <span hidden="@(height >= 2)" class="warning">Height has to be &gt;= 2</span>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <button @onclick="Calculate" disabled="@(height < 2)">Calculate</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@if (results != null)
+{
+    <h2>Result</h2>
+
+    <table>
+        @foreach (var result in results)
+        {
+        <tr>
+            <td class="rightAligned">@result.Base</td>
+            <td>@result.Operator</td>
+            <td>@result.Operand</td>
+            <td>=</td>
+            <td>@result.Result</td>
+        </tr>
+        }
+    </table>
+}
+
+@code {
+    int baseNumber = 2;
+    int height = 5;
+    IEnumerable<ResultLine> results;
+
+    void Calculate()
+    {
+        var result = new ResultLine[height * 2 - 2];
+        var index = 0;
+        var currentBase = baseNumber;
+        for (var i = 2; i <= height; i++)
+        {
+            result[index++] = new ResultLine
+            {
+                Base = currentBase,
+                Operand = i,
+                Operator = '*',
+                Result = (currentBase = currentBase * i)
+            };
+        }
+        for (var i = 2; i <= height; i++)
+        {
+            result[index++] = new ResultLine
+            {
+                Base = currentBase,
+                Operand = i,
+                Operator = '/',
+                Result = (currentBase = currentBase / i)
+            };
+        }
+
+        results = result;
+    }
+}
